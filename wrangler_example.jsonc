@@ -1,7 +1,7 @@
 {
   "name": "otovillain-static",
   "main": "src/worker.js",
-  "workers_dev": true,
+  "workers_dev": false,
   "preview_urls": false,
   "compatibility_date": "2026-06-14",
   "observability": {
@@ -18,5 +18,9 @@
       "persist": true,
       "head_sampling_rate": 1
     }
+  },
+  "vars": {
+    "GCS_BUCKET_NAME": "",
+    "GCS_CLIENT_EMAIL": ""
   }
 }
