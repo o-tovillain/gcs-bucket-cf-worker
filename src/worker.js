@@ -1,4 +1,4 @@
-import { SignJWT } from "jose";
+import { SignJWT, importPKCS8 } from "jose";
 
 export default {
   async fetch(request, env, ctx) {
@@ -33,9 +33,11 @@ async function getAccessToken(env) {
     iat: now,
   };
 
+  const privateKey = await importPKCS8(env.GCS_PRIVATE_KEY, "RS256");
+
   const jwt = await new SignJWT(jwtClaim)
     .setProtectedHeader(jwtHeader)
-    .sign(env.GCS_PRIVATE_KEY);
+    .sign(privateKey);
 
   const response = await fetch("https://oauth2.googleapis.com/token", {
     method: "POST",
